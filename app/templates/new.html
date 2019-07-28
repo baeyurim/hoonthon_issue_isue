@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="POST" action="{% url 'new' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    Keyword : 
+    <select name="key" required>
+        <option value="politics">정치</option>
+        <option value="economy">경제</option>
+        <option value="social">사회</option>
+        <option value="entertainmant">연예</option>
+    </select><br>
+    Title: <input type="text" class="form-control" name="title"><br>     
+    Body:<br> <textarea class="form-control" rows="5" name="body"></textarea><br> 
+    Image: <input type="file" name="image">
+    <input class="btn btn-dark" type="submit" value="제출">
+
+
+</form>
+{% endblock %}

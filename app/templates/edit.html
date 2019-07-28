@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="POST" action="{% url 'edit' issue.id%}" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    Keyword : 
+    <select name="key" required>
+        <option value="정치">정치</option>
+        <option value="경제">경제</option>
+        <option value="사회">사회</option>
+        <option value="연예">연예</option>
+    </select><br>
+    Title: <input type="text" class="form-control" name="title" value="{{issue.title}}"><br>     
+    Body:<br> <textarea class="form-control" rows="5" name="body">{{issue.body}}</textarea><br> 
+    Image: <input type="file" name="image" value="{{issue.image.url}}">
+    <input class="btn btn-dark" type="submit" value="수정완료">
+
+
+</form>
+{% endblock %}

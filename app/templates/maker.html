@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content%}
+
+{% block exstyle %}
+<style>
+.MkImg{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.MkContain{
+    margin-top: 30px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+.MkBox{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-weight: bold;
+}
+.MkBox h2{
+    margin-top: 10px;
+    font-size: 25px;
+}
+</style>
+{% endblock %}
+
+<div class="MkContain">
+    <div class="MkBox">
+        <img class="MkImg" src="{% static 'jung.jpg' %}" alt="Avatar">
+        <h2>가천대 정내혁</h2>
+    </div>
+    <div class="MkBox">
+        <img class="MkImg" src="{% static 'kwon.jpg' %}" alt="Avatar">
+        <h2>건국대 권현지 </h2>
+    </div>
+    <div class="MkBox">
+        <img class="MkImg" src="{% static 'bae.jpg' %}" alt="Avatar">
+        <h2>동덕여대 배유림</h2>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block exstyle %}
+    <style>
+        form{
+            min-width: 30%;
+        }
+        .btn{
+            width: 100%;
+            background: #1058CC;
+        }
+        .SignUpBtn{
+            margin-top: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<h1 class="title " id="LoginTitle">로그인</h1>
+    
+    
+    
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Username</label>
+            <input class="form-control" name="username" type="text" value="">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" name="password" type="password" value="">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Login">
+        <button class="btn btn-primary SignUpBtn"><a href="" style="color:white;">SignUp</a></button>
+    </form>
+    
+    {% endblock %}
+    {% block script %}
+    <script>
+        var IssueTitleHeight = window.innerHeight
+        document.getElementById("LoginTitle").style.marginTop = String(IssueTitleHeight/8) + "px"
+    </script>
+    {% endblock %}

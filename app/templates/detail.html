@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block exstyle %}
+    <style>
+        .title{
+            margin: 10px 0;
+        }
+        .imgContain{
+            width: 588px;
+            max-width: 588px;
+        }
+        .issueBody{
+            margin-top: 10px;
+            width: 588px;
+            font-size:20px;
+        }
+        .dateContain{
+            width: 588px;
+            font-size: 10px;
+            text-align:right;
+        }
+        .change{
+            background: #1058CC;
+        }
+        .commentContain{
+            width: 588px;
+        }
+        .commentImg{
+            width: 50px;
+            height: 50px;
+        }
+        .commnetBox{
+            width: 100%;
+            margin-left: 30px;
+            display: flex;
+        }
+        .commnetBox_img{
+            width:17px; 
+            height:17px;
+        }
+        .commnetBox_p{
+            width: 80%;
+            padding-left: 10px;
+            text-align: left;
+            font-weight: bold;
+        }
+        .commnetBox_p{
+            justify-self: flex-end;
+            align-self: flex-end;
+        }
+        .commentForm{
+            margin: 20px 0 30px 0;
+            width: 588px;
+            display: flex;
+        }
+        .commentForm input{
+            width: 80%;
+        }
+        .commentForm button{
+            width: 20%;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<h1 class="title">{{issue.title}}</h1>
+<h2 class="tagSelect">#{{issue.key}}</h2>
+    <div class="contents">
+        <img class="imgContain" src="{{ issue.image.url }}" class="rounded mx-auto d-block">
+        <p class="dateContain">{{issue.date}} <br>by. {{issue.writer}}</p>
+        <div class="issueBody">
+            {% if user.username == issue.writer %}
+                <p style="text-align: right"><a href="{% url 'edit' issue.id %}" class="change badge badge-primary">수정</a>
+                <a href="{% url 'delete' issue.id %}" class="badge badge-secondary">삭제</a></p>
+            {% endif %} 
+        </div>
+        
+    </div>
+    <div class="commentContain">
+        <img class="commentImg" src="https://cdn0.iconfinder.com/data/icons/bicon/24/other_reviews_comment_messages_comments-512.png"><br>
+        {% for comment in issue.comments.all %}
+            <div class="commnetBox">
+                <img class="commnetBox_img" src="{% static 'man.png' %}"> 
+                <p class="commnetBox_p">{{comment.com_writer}} : {{ comment.contents }} </p>
+            {% if user.username == comment.com_writer %}
+                <a class="commnetBox_a" href="{% url 'comment_delete' issue.id comment.id %}"  class="badge badge-secondary">삭제</a><br>
+            {% endif %}
+            </div>
+        {% endfor %}
+        {% if user.is_authenticated %}
+            <form class="commentForm" action="{% url 'comment_create' issue.id %}" method=POST>
+            {% csrf_token %}
+                <input type="text" name="contents" style="height:50px;">
+                <button type="submit" >댓글쓰기</button>
+            </form>
+        {% endif %}
+    </div>
+
+{% endblock %}

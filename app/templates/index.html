@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block exstyle %}
+<style>
+    .title{
+        margin-bottom: 30px;
+    }
+    form{
+        width: 60%;
+        margin-bottom: 40px;
+    }
+    .tagContain{
+        display: flex;
+    }
+    .btn{
+        width: 80px;
+        background: white;
+    }
+</style>
+{% endblock %}
+{% block content%}
+    <h1 class="title" id="IssueTitle">이슈!</h1>
+    <form action="{% url 'search'%}" method="GET" name="myform">
+        <div class="input-group"> 
+            <input class="form-control" id="put" type="text" name="search" value="{{search}}" placeholder="검색어를 입력하세요!">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+    <div class="tagContain">
+        <a href="{% url 'filtering' 0 %}" class="tagSelect" name="정치">#정치 </a>
+        <a href="{% url 'filtering' 1 %}" class="tagSelect" name="경제">#경제 </a>
+        <a href="{% url 'filtering' 2 %}" class="tagSelect" name="사회">#사회 </a>
+        <a href="{% url 'filtering' 3 %}" class="tagSelect" name="연예">#연예 </a>
+    </div>
+{% endblock %}
+{% block content2 %}
+<h1 class="title">있슈?</h1>
+    {% for i in issues %}
+    <div class="card">
+        <img src="{{ i.image.url }}" class="card-img-top cardImg">
+        <div class="card-body cardContain">
+            <h5 class="card-title"><a href="{% url 'detail' i.id %}">{{i.title}}</a></h5>
+            <p class="card-text">{{i.summary}}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
+{% block script %}
+<script src="https://kit.fontawesome.com/6ad9655cf3.js"></script>
+<script>
+    var all_height = window.innerHeight
+    var IssueTitleHeight = window.innerHeight
+    document.getElementById("first").style.height = String(all_height) + "px"
+    document.getElementById("IssueTitle").style.marginTop = String(IssueTitleHeight/4) + "px"
+</script>
+{% endblock %}
