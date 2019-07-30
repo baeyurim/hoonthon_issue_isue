@@ -1,1 +1,1 @@
-gunicorn issueisue.wsgi --log-file -
+web: gunicorn issue_isue.wsgi --log-file -
