@@ -14,6 +14,14 @@ pip install django
 pip install Pillow
 ```
 
+## 헤루쿠
+```bash
+pip install gunicorn
+pip install dj-database-url # DB설정
+pip install psycopg2-binary # DB설정
+pip install whitenoise # static 설정
+```
+
 ## 실행
 
 ```bash
@@ -25,7 +33,7 @@ python manage.py runserver
 
 ## 기술
 
-###Django
+### Django
 
 ### html&CSS&JavaScript
 
