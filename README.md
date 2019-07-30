@@ -43,7 +43,7 @@ python manage.py runserver
 
 ## 개발자
 
-### [권현지]()
+### [권현지](https://github.com/rnjsguswl393)
 
 ### [배유림](https://github.com/baeyurim)
 
